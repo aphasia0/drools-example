@@ -1,0 +1,22 @@
+package dev.antoniogiordano.drools_example
+
+import java.util.Map
+import dev.antoniogiordano.drools_example.MyValue;
+
+rule "Does it uses MongoDB?"
+    when
+         $entry : Map.Entry( key == "MONGOURI",  $myValue : value )
+         $value: MyValue( value matches "^mongodb:.*$" ) from $myValue
+    then
+        System.out.println("It uses MongoDB database");
+        $value.getMetadata().add("It uses MongoDB database");
+end
+rule "Prod Env"
+    when
+         $entry : Map.Entry( key == "MONGOURI",  $myValue : value )
+         $value: MyValue( value matches "^mongodb:.*$" ) from $myValue
+         $value2: MyValue( value matches "^.*cariprpcpar.*$" ) from $myValue
+    then
+        System.out.println("It connects to env: parallelo");
+        $value.getMetadata().add("It connects to env: parallelo");
+end

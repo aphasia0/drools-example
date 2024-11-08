@@ -1,0 +1,6 @@
+<!-- src/main/resources/META-INF/kmodule.xml -->
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
+    <kbase name="rule" packages="dev.antoniogiordano.drools_example">
+        <ksession name="defaultKieSession"/>
+    </kbase>
+</kmodule>

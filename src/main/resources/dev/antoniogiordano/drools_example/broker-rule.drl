@@ -1,0 +1,13 @@
+package dev.antoniogiordano.drools_example
+
+import java.util.Map
+import dev.antoniogiordano.drools_example.MyValue;
+
+rule "Does it uses Kafka?"
+    when
+         $entry : Map.Entry( key == "KAFKA_BROKERS",  $myValue : value )
+         $value: MyValue( value matches "^.*broker1.kafka.example.*$" ) from $myValue
+    then
+        System.out.println("It uses Kafka");
+        $value.getMetadata().add("It uses Kafka");
+end
